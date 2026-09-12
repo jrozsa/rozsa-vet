@@ -51,12 +51,12 @@ export const routes = {
 
 export const nav = {
   sk: [
-    { label: "O nás", href: routes.sk.about },
+    { label: "O nás", href: routes.sk.home },
     { label: "Služby", href: routes.sk.services },
     { label: "Kontakt", href: routes.sk.contact },
   ],
   hu: [
-    { label: "Rólunk", href: routes.hu.about },
+    { label: "Rólunk", href: routes.hu.home },
     { label: "Szolgáltatások", href: routes.hu.services },
     { label: "Kapcsolat", href: routes.hu.contact },
   ],
@@ -68,10 +68,6 @@ export const pages = {
       title: "Veterinárna nemocnica v Dunajskej Strede",
       description:
         "Rozsa-Vet poskytuje veterinárnu starostlivosť, diagnostiku, chirurgiu, RTG, hospitalizáciu a preventívnu starostlivosť pre zvieratá v Dunajskej Strede.",
-    },
-    about: {
-      title: "O nás",
-      description: "Veterinárna nemocnica v Dunajskej Strede od roku 1992.",
     },
     services: {
       title: "Služby",
@@ -89,10 +85,6 @@ export const pages = {
       title: "Állatkórház Dunaszerdahelyen",
       description:
         "A Rozsa-Vet állatorvosi ellátást, diagnosztikát, sebészetet, röntgent, kórházi ellátást és megelőző kezeléseket nyújt Dunaszerdahelyen.",
-    },
-    about: {
-      title: "Rólunk",
-      description: "Állatkórház Dunaszerdahelyen 1992 óta.",
     },
     services: {
       title: "Szolgáltatások",
@@ -118,9 +110,6 @@ export const copy = {
     navigate: "Navigovať",
     hours: "Ordinačné hodiny",
     todayNote: "Mimo ordinačných hodín poskytujeme ošetrenie po telefonickom dohovore.",
-    footerHoursLabel: "Každý pracovný deň",
-    footerHoursTime: "8:00 – 12:00 · 13:00 – 16:00",
-    footerHoursNote: "Mimo týchto hodín ošetrujeme po telefonickom dohovore.",
     heroEyebrow: "Veterinárna nemocnica od roku 1992",
     heroTitle: "Komplexná veterinárna starostlivosť v Dunajskej Strede",
     heroText:
@@ -129,9 +118,14 @@ export const copy = {
       "Najdôležitejšie služby sme usporiadali tak, aby majiteľ rýchlo našiel, s čím klinika pomáha, a odborné detaily zostali dostupné nižšie.",
     contactIntro:
       "Pre objednanie, urgentnú konzultáciu alebo ošetrenie mimo ordinačných hodín nás kontaktujte telefonicky.",
-    footerText: "Veterinárna poliklinika s nemocnicou v Dunajskej Strede.",
     allServices: "Všetky služby",
-    whyTitle: "Prečo Rozsa-Vet",
+    whyEyebrow: "Prečo práve my",
+    whyTitle: "Istota pre tých, ktorých máte radi",
+    whyIntro:
+      "Keď ide o zdravie zvieraťa, potrebujete viac než ordináciu. Potrebujete miesto, kde sa skúsenosť, vybavenie a ľudský prístup stretnú pod jednou strechou.",
+    whyYearLabel: "s nami od februára",
+    whyHistory:
+      "Už viac ako tri desaťročia sme súčasťou života majiteľov v Dunajskej Strede a okolí. Od prvej vakcinácie až po náročnú nemocničnú starostlivosť — ostávame nablízku, keď na tom najviac záleží.",
     address: "Adresa",
     phone: "Telefón",
     mobile: "Mobil",
@@ -147,9 +141,6 @@ export const copy = {
     navigate: "Útvonalterv",
     hours: "Rendelési idő",
     todayNote: "Rendelési időn kívül telefonos egyeztetés alapján biztosítunk ellátást.",
-    footerHoursLabel: "Minden munkanapon",
-    footerHoursTime: "8:00 – 12:00 · 13:00 – 16:00",
-    footerHoursNote: "Ezen az időn kívül telefonos egyeztetés alapján biztosítunk ellátást.",
     heroEyebrow: "Állatkórház 1992 óta",
     heroTitle: "Komplex állatorvosi ellátás Dunaszerdahelyen",
     heroText:
@@ -158,9 +149,14 @@ export const copy = {
       "A szolgáltatásokat áttekinthető csoportokba rendeztük, hogy a gazdik gyorsan megtalálják a szükséges ellátást, a szakmai részletek pedig külön is elérhetők legyenek.",
     contactIntro:
       "Időpont, sürgős konzultáció vagy rendelési időn kívüli ellátás esetén kérjük, telefonon vegye fel velünk a kapcsolatot.",
-    footerText: "Állatorvosi poliklinika és állatkórház Dunaszerdahelyen.",
     allServices: "Összes szolgáltatás",
-    whyTitle: "Miért a Rozsa-Vet",
+    whyEyebrow: "Miért éppen mi",
+    whyTitle: "Biztonság azoknak, akiket szeret",
+    whyIntro:
+      "Amikor az állat egészsége a tét, több kell egy rendelőnél. Olyan hely kell, ahol a tapasztalat, a felszerelés és a személyes odafigyelés egy fedél alatt találkozik.",
+    whyYearLabel: "velünk február óta",
+    whyHistory:
+      "Több mint három évtizede vagyunk a dunaszerdahelyi és környékbeli gazdik életének része. Az első oltástól a komolyabb kórházi ellátásig — ott vagyunk, amikor a leginkább számít.",
     address: "Cím",
     phone: "Telefon",
     mobile: "Mobil",
@@ -172,41 +168,33 @@ export function outOfHoursText(lang: Lang) {
   return copy[lang].outOfHours.replace("{phone}", clinic.mobileDisplay);
 }
 
-export const serviceHighlights = {
+export const whyReasons = {
   sk: [
     {
-      title: "Diagnostika a laboratórium",
-      text: "Hematologické, biochemické, mikrobiologické, sérologické a patohistologické vyšetrenia.",
+      title: "Skúsenosť, ktorú nejde urýchliť",
+      text: "Od roku 1992 sme sprevádzali tisíce pacientov. Každé vyšetrenie stojí na praxi, ktorá sa budovala desaťročia — nie na náhlych rozhodnutiach.",
     },
     {
-      title: "Prevencia a vakcinácia",
-      text: "Preventívne ošetrenia a vakcinačné programy pre psov, mačky, kone, holuby a malé hlodavce.",
+      title: "Nemocnica, nie len ambulancia",
+      text: "Diagnostika, RTG, chirurgia aj hospitalizácia sú u nás na jednom mieste. Menej cestovania medzi pracoviskami, rýchlejšie a spoľahlivejšie rozhodnutia.",
     },
     {
-      title: "RTG a chirurgia",
-      text: "Natívne a kontrastné RTG snímky, mäkkotkanivová, kostná a očná chirurgia.",
-    },
-    {
-      title: "Hospitalizácia",
-      text: "Hospitalizácia pacientov s možnosťou intenzívnej starostlivosti.",
+      title: "Rozumieme majiteľom aj pacientom",
+      text: "Hovoríme zrozumiteľne o tom, čo sa deje a prečo. Dôvera vzniká vtedy, keď viete, že pri ťažkých rozhodnutiach nie ste sami.",
     },
   ],
   hu: [
     {
-      title: "Diagnosztika és labor",
-      text: "Hematológiai, biokémiai, mikrobiológiai, szerológiai és kórszövettani vizsgálatok.",
+      title: "Tapasztalat, amit nem lehet siettetni",
+      text: "1992 óta kísérünk el több ezer pácienst. Minden vizsgálat mögött évtizedes gyakorlat áll — nem kapkodó döntések.",
     },
     {
-      title: "Megelőzés és oltások",
-      text: "Megelőző ellátás és oltási programok kutyáknak, macskáknak, lovaknak, galamboknak és kisrágcsálóknak.",
+      title: "Kórház, nem csak rendelő",
+      text: "Diagnosztika, röntgen, sebészet és hospitalizáció egy helyen. Kevesebb utazás a vizsgálatok között, gyorsabb és biztosabb döntések.",
     },
     {
-      title: "Röntgen és sebészet",
-      text: "Natív és kontrasztos röntgenfelvételek, lágyrész-, csont- és szemsebészet.",
-    },
-    {
-      title: "Kórházi ellátás",
-      text: "Betegek hospitalizációja intenzív gondozási lehetőséggel.",
+      title: "Értjük a gazdit és a pácienst is",
+      text: "Érthetően elmondjuk, mi történik és miért. A bizalom akkor születik, amikor tudja: a nehéz döntéseknél nincs egyedül.",
     },
   ],
 } satisfies Record<Lang, Array<{ title: string; text: string }>>;
@@ -281,73 +269,6 @@ export const services = {
     },
   ],
 } satisfies Record<Lang, Array<{ title: string; text: string; items: string[] }>>;
-
-export const about = {
-  sk: {
-    storyTitle: "Nemocnica pre zvieratá od roku 1992",
-    intro:
-      "Rozsa-Vet je rodinná veterinárna nemocnica, kde sa staráme o zvieratá s dôrazom na spoľahlivú diagnostiku, liečbu a ľudský prístup k majiteľom.",
-    history:
-      "Od 1. februára 1992 pomáhame majiteľom zvierat v Dunajskej Strede a okolí — od prevencie až po náročnejšiu nemocničnú starostlivosť.",
-    valuesTitle: "Čo je pre nás dôležité",
-    values: [
-      {
-        title: "Dlhoročná prax",
-        text: "Skúsenosti budujeme od roku 1992 — pri bežných ošetreniach aj pri zložitejších prípadoch.",
-      },
-      {
-        title: "Nemocničná starostlivosť",
-        text: "Diagnostika, liečba aj hospitalizácia sú u nás na jednom mieste.",
-      },
-      {
-        title: "Individuálny prístup",
-        text: "Ku každému zvieraťu a majiteľovi pristupujeme osobne a zrozumiteľne.",
-      },
-    ],
-    animalsTitle: "O aké zvieratá sa staráme",
-    animalsText:
-      "Staráme sa o malé aj veľké zvieratá, kone, hydinu, plazy a exotické vtáctvo.",
-    animals: ["malé zvieratá", "veľké zvieratá", "kone", "hydina", "plazy", "exotické vtáctvo"],
-  },
-  hu: {
-    storyTitle: "Állatkórház 1992 óta",
-    intro:
-      "A Rozsa-Vet családi állatkórház, ahol a megbízható diagnosztika, a kezelés és a gazdikkal való személyes kapcsolat egyaránt fontos.",
-    history:
-      "1992. február 1. óta segítjük a dunaszerdahelyi és környékbeli állattartókat — a megelőzéstől a komolyabb kórházi ellátásig.",
-    valuesTitle: "Ami számunkra fontos",
-    values: [
-      {
-        title: "Évtizedes gyakorlat",
-        text: "1992 óta gyűjtjük a tapasztalatot — a mindennapi ellátástól az összetettebb esetekig.",
-      },
-      {
-        title: "Kórházi ellátás",
-        text: "A diagnosztika, a kezelés és a hospitalizáció egy helyen elérhető.",
-      },
-      {
-        title: "Személyes hozzáállás",
-        text: "Minden állathoz és gazdihoz egyénileg, érthetően és figyelmesen fordulunk.",
-      },
-    ],
-    animalsTitle: "Milyen állatokat látunk el",
-    animalsText:
-      "Kis- és nagyállatokat, lovakat, baromfit, hüllőket és egzotikus madarakat is ellátunk.",
-    animals: ["kisállatok", "nagyállatok", "lovak", "baromfi", "hüllők", "egzotikus madarak"],
-  },
-} satisfies Record<
-  Lang,
-  {
-    storyTitle: string;
-    intro: string;
-    history: string;
-    valuesTitle: string;
-    values: Array<{ title: string; text: string }>;
-    animalsTitle: string;
-    animalsText: string;
-    animals: string[];
-  }
->;
 
 export function localizedHours(lang: Lang) {
   return openingHours.map((item) => ({

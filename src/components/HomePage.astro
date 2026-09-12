@@ -1,8 +1,7 @@
 ---
-import ContactActions from "@/components/ContactActions.astro";
-import HoursList from "@/components/HoursList.astro";
+import PageHero from "@/components/PageHero.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { about, clinic, copy, outOfHoursText, pages, routes, serviceHighlights, type Lang } from "@/content/site";
+import { clinic, copy, pages, routes, whyReasons, type Lang } from "@/content/site";
 import { withBase } from "@/lib/urls";
 
 interface Props {
@@ -12,74 +11,51 @@ interface Props {
 const { lang } = Astro.props;
 const t = copy[lang];
 const path = routes[lang].home;
-const address = `${clinic.address.street}, ${clinic.address.postalCode} ${clinic.address.city}`;
+const reasons = whyReasons[lang];
 ---
 
 <BaseLayout lang={lang} page="home" path={path}>
-  <section class="hero" style={`--hero-image: url('${withBase("/assets/legacy/top.png")}')`}>
-    <div class="container">
-      <div>
-        <p class="eyebrow">{t.heroEyebrow}</p>
-        <h1>{t.heroTitle}</h1>
-        <p class="lead">{t.heroText}</p>
-        <ContactActions lang={lang} variant="hero" />
-      </div>
-      <aside class="info-card">
-        <h2>{t.hours}</h2>
-        <HoursList lang={lang} />
-        <p>{t.todayNote}</p>
-      </aside>
-    </div>
-  </section>
+  <PageHero
+    eyebrow={t.heroEyebrow}
+    title={t.heroTitle}
+    text={t.heroText}
+    backgroundImage="/assets/hero-dog.jpg"
+  />
 
-  <section class="section">
-    <div class="container">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">{clinic.name}</p>
-          <h2>{t.whyTitle}</h2>
+  <section class="why-us section" aria-labelledby="why-us-title">
+    <div class="container why-us-inner">
+      <header class="why-us-header">
+        <p class="eyebrow">{t.whyEyebrow}</p>
+        <h2 id="why-us-title">{t.whyTitle}</h2>
+        <p class="why-us-intro">{t.whyIntro}</p>
+      </header>
+
+      <div class="why-us-story">
+        <div class="why-us-year">
+          <span class="why-us-year-value">{clinic.founded}</span>
+          <span class="why-us-year-label">{t.whyYearLabel}</span>
         </div>
-        <p>{about[lang].intro}</p>
+        <p class="why-us-history">{t.whyHistory}</p>
       </div>
-      <div class="grid">
-        <article class="card highlight">
-          <h3>{clinic.founded}</h3>
-          <p>{about[lang].history}</p>
-        </article>
-        {serviceHighlights[lang].map((item) => (
-          <article class="card">
-            <h3>{item.title}</h3>
-            <p>{item.text}</p>
-          </article>
+
+      <ol class="why-us-reasons">
+        {reasons.map((reason, index) => (
+          <li class="why-us-reason">
+            <span class="why-us-index">{String(index + 1).padStart(2, "0")}</span>
+            <h3>{reason.title}</h3>
+            <p>{reason.text}</p>
+          </li>
         ))}
-      </div>
+      </ol>
     </div>
   </section>
 
   <section class="section alt">
     <div class="container">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">{t.allServices}</p>
-          <h2>{pages[lang].services.title}</h2>
-        </div>
+      <div class="services-cta">
+        <h2>{pages[lang].services.title}</h2>
         <p>{pages[lang].services.description}</p>
-      </div>
-      <a class="button teal" href={withBase(routes[lang].services)}>{t.allServices}</a>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container contact-panel">
-      <div>
-        <p class="eyebrow">{pages[lang].contact.title}</p>
-        <h2>{address}</h2>
-        <p class="muted">{t.contactIntro}</p>
-        <ContactActions lang={lang} />
-      </div>
-      <div class="card">
-        <HoursList lang={lang} />
-        <p class="muted">{outOfHoursText(lang)}</p>
+        <a class="button teal" href={withBase(routes[lang].services)}>{t.allServices}</a>
       </div>
     </div>
   </section>

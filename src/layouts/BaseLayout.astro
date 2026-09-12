@@ -126,7 +126,7 @@ const schema = {
 
     {page !== "contact" && (
       <section class="contact-band" aria-label={t.contactIntro}>
-        <div class="container contact-band-inner">
+        <div class="contact-band-inner">
           <div>
             <strong>{clinic.name}</strong>
             <span>{address}</span>
@@ -141,36 +141,13 @@ const schema = {
     )}
 
     <footer class="site-footer">
-      <div class="container footer-grid">
-        <div>
-          <strong>{clinic.name}</strong>
-          <p>{t.footerText}</p>
-          <p>
-            {clinic.address.street}<br />
-            {clinic.address.postalCode} {clinic.address.city}<br />
-            {clinic.address.country}
-          </p>
-        </div>
-        <div class="footer-hours">
-          <h2>{t.hours}</h2>
-          <div class="footer-hours-summary">
-            <span class="footer-hours-label">{t.footerHoursLabel}</span>
-            <strong class="footer-hours-time">{t.footerHoursTime}</strong>
-          </div>
-          <p class="footer-hours-note">{t.footerHoursNote}</p>
-        </div>
-        <div class="footer-contact">
-          <h2>{pages[lang].contact.title}</h2>
-          <p>
-            <span class="footer-contact-label">{t.phone}</span>
-            <a href={`tel:${clinic.mobile}`}>{clinic.mobileDisplay}</a>
-          </p>
-          <p>
-            <span class="footer-contact-label">Email</span>
-            <a href={`mailto:${clinic.email}`}>{clinic.email}</a>
-          </p>
-        </div>
-      </div>
+      <img
+        class="site-footer-banner"
+        src={withBase("/assets/legacy/bottom.png")}
+        alt={`${clinic.name} — veterinárna nemocnica`}
+        width="1321"
+        height="163"
+      />
     </footer>
   </body>
 </html>
