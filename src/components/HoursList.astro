@@ -1,0 +1,19 @@
+---
+import { localizedHours, type Lang } from "@/content/site";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const hours = localizedHours(lang);
+---
+
+<ul class="hours-list">
+  {hours.map((item) => (
+    <li>
+      <strong>{item.day}</strong>
+      <span>{item.hours}</span>
+    </li>
+  ))}
+</ul>

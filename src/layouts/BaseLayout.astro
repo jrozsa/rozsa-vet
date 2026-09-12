@@ -1,0 +1,176 @@
+---
+import "../styles/global.css";
+import { clinic, copy, getAlternatePath, languages, nav, pages, routes, type Lang } from "@/content/site";
+import { withBase } from "@/lib/urls";
+
+interface Props {
+  lang: Lang;
+  page: keyof (typeof pages)["sk"];
+  path: string;
+}
+
+const { lang, page, path } = Astro.props;
+const t = copy[lang];
+const meta = pages[lang][page];
+const canonicalUrl = new URL(withBase(path), Astro.site).toString();
+const imageUrl = new URL(withBase("/assets/legacy/top.png"), Astro.site).toString();
+const address = `${clinic.address.street}, ${clinic.address.postalCode} ${clinic.address.city}`;
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "VeterinaryCare",
+  name: clinic.name,
+  legalName: clinic.legalName,
+  url: Astro.site?.toString(),
+  image: imageUrl,
+  telephone: clinic.mobile,
+  email: clinic.email,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: clinic.address.street,
+    addressLocality: clinic.address.city,
+    postalCode: clinic.address.postalCode,
+    addressCountry: "SK",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: clinic.coordinates.latitude,
+    longitude: clinic.coordinates.longitude,
+  },
+};
+---
+
+<!doctype html>
+<html lang={languages[lang].htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{meta.title} | {clinic.name}</title>
+    <meta name="description" content={meta.description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="sk" href={new URL(withBase(getAlternatePath(path, "sk")), Astro.site).toString()} />
+    <link rel="alternate" hreflang="hu" href={new URL(withBase(getAlternatePath(path, "hu")), Astro.site).toString()} />
+    <link rel="icon" href={withBase("/favicon.jpg")} type="image/jpeg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={`${meta.title} | ${clinic.name}`} />
+    <meta property="og:description" content={meta.description} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:url" content={canonicalUrl} />
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="container nav-bar">
+        <a class="brand" href={withBase(routes[lang].home)} aria-label={`${clinic.name} ${t.home}`}>
+          <img class="brand-logo" src={withBase("/assets/legacy/logo.png")} alt="Rozsa-Vet veterinárna nemocnica" />
+        </a>
+
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="primary-nav"
+          aria-label={t.menuOpen}
+          data-label-open={t.menuOpen}
+          data-label-close={t.menuClose}
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+
+        <div class="nav-panel" id="primary-nav">
+          <nav class="main-nav" aria-label="Main navigation">
+            {nav[lang].map((item) => <a href={withBase(item.href)}>{item.label}</a>)}
+          </nav>
+
+          <div class="language-switcher" aria-label={t.languageLabel}>
+            <a class={lang === "sk" ? "active" : ""} href={withBase(getAlternatePath(path, "sk"))}>SK</a>
+            <a class={lang === "hu" ? "active" : ""} href={withBase(getAlternatePath(path, "hu"))}>HU</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <script>
+      const header = document.querySelector(".site-header");
+      const toggle = document.querySelector(".nav-toggle");
+
+      const setOpen = (open: boolean) => {
+        header?.classList.toggle("nav-open", open);
+        toggle?.setAttribute("aria-expanded", String(open));
+        if (toggle instanceof HTMLElement) {
+          toggle.setAttribute(
+            "aria-label",
+            open ? (toggle.dataset.labelClose ?? "Close menu") : (toggle.dataset.labelOpen ?? "Open menu"),
+          );
+        }
+      };
+
+      toggle?.addEventListener("click", () => {
+        setOpen(!header?.classList.contains("nav-open"));
+      });
+
+      header?.querySelectorAll(".nav-panel a").forEach((link) => {
+        link.addEventListener("click", () => setOpen(false));
+      });
+
+      window.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") setOpen(false);
+      });
+    </script>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    {page !== "contact" && (
+      <section class="contact-band" aria-label={t.contactIntro}>
+        <div class="container contact-band-inner">
+          <div>
+            <strong>{clinic.name}</strong>
+            <span>{address}</span>
+          </div>
+          <div class="quick-actions compact">
+            <a class="button light" href={`tel:${clinic.mobile}`}>{t.call}</a>
+            <a class="button ghost-light" href={`mailto:${clinic.email}`}>{t.email}</a>
+            <a class="button ghost-light" href={clinic.mapUrl} target="_blank" rel="noreferrer">{t.navigate}</a>
+          </div>
+        </div>
+      </section>
+    )}
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <strong>{clinic.name}</strong>
+          <p>{t.footerText}</p>
+          <p>
+            {clinic.address.street}<br />
+            {clinic.address.postalCode} {clinic.address.city}<br />
+            {clinic.address.country}
+          </p>
+        </div>
+        <div class="footer-hours">
+          <h2>{t.hours}</h2>
+          <div class="footer-hours-summary">
+            <span class="footer-hours-label">{t.footerHoursLabel}</span>
+            <strong class="footer-hours-time">{t.footerHoursTime}</strong>
+          </div>
+          <p class="footer-hours-note">{t.footerHoursNote}</p>
+        </div>
+        <div class="footer-contact">
+          <h2>{pages[lang].contact.title}</h2>
+          <p>
+            <span class="footer-contact-label">{t.phone}</span>
+            <a href={`tel:${clinic.mobile}`}>{clinic.mobileDisplay}</a>
+          </p>
+          <p>
+            <span class="footer-contact-label">Email</span>
+            <a href={`mailto:${clinic.email}`}>{clinic.email}</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

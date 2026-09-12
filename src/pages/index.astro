@@ -1,0 +1,20 @@
+---
+import { routes } from "@/content/site";
+import { withBase } from "@/lib/urls";
+
+const target = withBase(routes.sk.home);
+---
+
+<!doctype html>
+<html lang="sk">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <title>Rozsa-Vet</title>
+    <link rel="canonical" href={target} />
+  </head>
+  <body>
+    <p><a href={target}>Pokračovať na Rozsa-Vet</a></p>
+  </body>
+</html>

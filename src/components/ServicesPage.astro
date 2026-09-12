@@ -1,0 +1,33 @@
+---
+import PageHero from "@/components/PageHero.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { copy, pages, routes, services, type Lang } from "@/content/site";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const path = routes[lang].services;
+const t = copy[lang];
+---
+
+<BaseLayout lang={lang} page="services" path={path}>
+  <PageHero title={pages[lang].services.title} text={t.servicesIntro} />
+
+  <section class="section">
+    <div class="container service-list">
+      {services[lang].map((service) => (
+        <article class="service-card">
+          <div>
+            <h2>{service.title}</h2>
+            <p class="muted">{service.text}</p>
+          </div>
+          <ul>
+            {service.items.map((item) => <li>{item}</li>)}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

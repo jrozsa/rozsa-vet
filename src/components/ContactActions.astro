@@ -1,0 +1,19 @@
+---
+import { clinic, copy, type Lang } from "@/content/site";
+
+interface Props {
+  lang: Lang;
+  variant?: "hero" | "default";
+}
+
+const { lang, variant = "default" } = Astro.props;
+const t = copy[lang];
+const primaryClass = variant === "hero" ? "button primary" : "button teal";
+const secondaryClass = variant === "hero" ? "button secondary" : "button";
+---
+
+<div class="quick-actions">
+  <a class={primaryClass} href={`tel:${clinic.mobile}`}>{t.call}</a>
+  <a class={secondaryClass} href={`mailto:${clinic.email}`}>{t.email}</a>
+  <a class={secondaryClass} href={clinic.mapUrl} target="_blank" rel="noreferrer">{t.navigate}</a>
+</div>

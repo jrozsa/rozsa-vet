@@ -1,0 +1,73 @@
+---
+import ContactActions from "@/components/ContactActions.astro";
+import HoursList from "@/components/HoursList.astro";
+import PageHero from "@/components/PageHero.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { clinic, copy, pages, routes, type Lang } from "@/content/site";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const path = routes[lang].contact;
+const t = copy[lang];
+const address = `${clinic.address.street}, ${clinic.address.postalCode} ${clinic.address.city}`;
+const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(address)}&output=embed`;
+const [outOfHoursBefore, outOfHoursAfter] = t.outOfHours.split("{phone}");
+---
+
+<BaseLayout lang={lang} page="contact" path={path}>
+  <PageHero title={pages[lang].contact.title} text={t.contactIntro} />
+
+  <section class="section">
+    <div class="container contact-panel">
+      <div class="contact-details">
+        <div class="card contact-actions-card">
+          <ContactActions lang={lang} />
+        </div>
+
+        <article class="card contact-info-card">
+          <div class="contact-info-block">
+            <h2>{t.address}</h2>
+            <p>
+              {clinic.address.street}<br />
+              {clinic.address.postalCode} {clinic.address.city}<br />
+              {clinic.address.country}
+            </p>
+          </div>
+          <div class="contact-info-block">
+            <h2>{t.phone}</h2>
+            <p>
+              <a href={`tel:${clinic.mobile}`}>{clinic.mobileDisplay}</a>
+            </p>
+          </div>
+          <div class="contact-info-block">
+            <h2>Email</h2>
+            <p>
+              <a href={`mailto:${clinic.email}`}>{clinic.email}</a>
+            </p>
+          </div>
+        </article>
+      </div>
+
+      <div class="card">
+        <h2>{t.hours}</h2>
+        <HoursList lang={lang} />
+        <p class="hours-note">
+          {outOfHoursBefore}
+          <a href={`tel:${clinic.mobile}`}>{clinic.mobileDisplay}</a>
+          {outOfHoursAfter}
+        </p>
+        <div class="map-frame" aria-label={lang === "sk" ? "Mapa kliniky Rozsa-Vet" : "Rozsa-Vet térkép"}>
+          <iframe
+            title={lang === "sk" ? "Mapa Rozsa-Vet" : "Rozsa-Vet térkép"}
+            src={mapSrc}
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

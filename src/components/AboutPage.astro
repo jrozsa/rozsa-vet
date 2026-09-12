@@ -1,0 +1,62 @@
+---
+import PageHero from "@/components/PageHero.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { about, clinic, pages, routes, type Lang } from "@/content/site";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const path = routes[lang].about;
+const content = about[lang];
+---
+
+<BaseLayout lang={lang} page="about" path={path}>
+  <PageHero
+    eyebrow={clinic.name}
+    title={pages[lang].about.title}
+    text={pages[lang].about.description}
+  />
+
+  <section class="section">
+    <div class="container about-story">
+      <p class="eyebrow">{clinic.founded}</p>
+      <h2>{content.storyTitle}</h2>
+      <p class="about-lead">{content.intro}</p>
+      <p class="muted">{content.history}</p>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">{clinic.name}</p>
+          <h2>{content.valuesTitle}</h2>
+        </div>
+      </div>
+      <div class="grid about-values">
+        {content.values.map((value) => (
+          <article class="card">
+            <h3>{value.title}</h3>
+            <p>{value.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container about-animals">
+      <p class="eyebrow">{lang === "sk" ? "Pacienti" : "Páciensek"}</p>
+      <h2>{content.animalsTitle}</h2>
+      <p class="about-lead">{content.animalsText}</p>
+      <ul class="animal-tags">
+        {content.animals.map((animal) => (
+          <li>{animal}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

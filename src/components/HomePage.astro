@@ -1,0 +1,86 @@
+---
+import ContactActions from "@/components/ContactActions.astro";
+import HoursList from "@/components/HoursList.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { about, clinic, copy, outOfHoursText, pages, routes, serviceHighlights, type Lang } from "@/content/site";
+import { withBase } from "@/lib/urls";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = copy[lang];
+const path = routes[lang].home;
+const address = `${clinic.address.street}, ${clinic.address.postalCode} ${clinic.address.city}`;
+---
+
+<BaseLayout lang={lang} page="home" path={path}>
+  <section class="hero" style={`--hero-image: url('${withBase("/assets/legacy/top.png")}')`}>
+    <div class="container">
+      <div>
+        <p class="eyebrow">{t.heroEyebrow}</p>
+        <h1>{t.heroTitle}</h1>
+        <p class="lead">{t.heroText}</p>
+        <ContactActions lang={lang} variant="hero" />
+      </div>
+      <aside class="info-card">
+        <h2>{t.hours}</h2>
+        <HoursList lang={lang} />
+        <p>{t.todayNote}</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">{clinic.name}</p>
+          <h2>{t.whyTitle}</h2>
+        </div>
+        <p>{about[lang].intro}</p>
+      </div>
+      <div class="grid">
+        <article class="card highlight">
+          <h3>{clinic.founded}</h3>
+          <p>{about[lang].history}</p>
+        </article>
+        {serviceHighlights[lang].map((item) => (
+          <article class="card">
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">{t.allServices}</p>
+          <h2>{pages[lang].services.title}</h2>
+        </div>
+        <p>{pages[lang].services.description}</p>
+      </div>
+      <a class="button teal" href={withBase(routes[lang].services)}>{t.allServices}</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container contact-panel">
+      <div>
+        <p class="eyebrow">{pages[lang].contact.title}</p>
+        <h2>{address}</h2>
+        <p class="muted">{t.contactIntro}</p>
+        <ContactActions lang={lang} />
+      </div>
+      <div class="card">
+        <HoursList lang={lang} />
+        <p class="muted">{outOfHoursText(lang)}</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
