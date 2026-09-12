@@ -575,9 +575,22 @@ h3 {
   position: relative;
   overflow: hidden;
   background:
-    linear-gradient(120deg, rgba(6, 63, 77, 0.92), rgba(6, 104, 126, 0.72)),
-    var(--hero-image, none) center / cover;
+    linear-gradient(
+      105deg,
+      rgba(6, 63, 77, 0.94) 0%,
+      rgba(6, 63, 77, 0.88) 32%,
+      rgba(6, 104, 126, 0.35) 58%,
+      rgba(6, 104, 126, 0.08) 78%,
+      transparent 100%
+    ),
+    var(--hero-image, none) right center / cover;
   padding: 72px 0;
+}
+
+.page-hero.has-image .eyebrow,
+.page-hero.has-image h1,
+.page-hero.has-image p {
+  max-width: 28rem;
 }
 
 .page-hero p {
