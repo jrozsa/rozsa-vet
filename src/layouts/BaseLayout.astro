@@ -1,5 +1,8 @@
 ---
+import { Image } from "astro:assets";
 import "../styles/global.css";
+import bottomBanner from "@/assets/legacy/bottom.png";
+import logoImage from "@/assets/legacy/logo.png";
 import { clinic, copy, getAlternatePath, languages, nav, pages, routes, type Lang } from "@/content/site";
 import { withBase } from "@/lib/urls";
 
@@ -14,7 +17,8 @@ const t = copy[lang];
 const meta = pages[lang][page];
 const canonicalUrl = new URL(withBase(path), Astro.site).toString();
 const imageUrl = new URL(withBase("/assets/legacy/top.png"), Astro.site).toString();
-const address = `${clinic.address.street}, ${clinic.address.postalCode} ${clinic.address.city}`;
+const addr = clinic.address[lang];
+const address = `${addr.street}, ${addr.postalCode} ${addr.city}`;
 const schema = {
   "@context": "https://schema.org",
   "@type": "VeterinaryCare",
@@ -26,9 +30,9 @@ const schema = {
   email: clinic.email,
   address: {
     "@type": "PostalAddress",
-    streetAddress: clinic.address.street,
-    addressLocality: clinic.address.city,
-    postalCode: clinic.address.postalCode,
+    streetAddress: addr.street,
+    addressLocality: addr.city,
+    postalCode: addr.postalCode,
     addressCountry: "SK",
   },
   geo: {
@@ -62,7 +66,7 @@ const schema = {
     <header class="site-header">
       <div class="container nav-bar">
         <a class="brand" href={withBase(routes[lang].home)} aria-label={`${clinic.name} ${t.home}`}>
-          <img class="brand-logo" src={withBase("/assets/legacy/logo.png")} alt="Rozsa-Vet veterinárna nemocnica" />
+          <Image class="brand-logo" src={logoImage} alt="Rozsa-Vet" loading="eager" />
         </a>
 
         <button
@@ -141,12 +145,10 @@ const schema = {
     )}
 
     <footer class="site-footer">
-      <img
+      <Image
         class="site-footer-banner"
-        src={withBase("/assets/legacy/bottom.png")}
-        alt={`${clinic.name} — veterinárna nemocnica`}
-        width="1321"
-        height="163"
+        src={bottomBanner}
+        alt={clinic.name}
       />
     </footer>
   </body>

@@ -1,4 +1,5 @@
 ---
+import heroDog from "@/assets/hero-dog.jpg";
 import PageHero from "@/components/PageHero.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { clinic, copy, pages, routes, whyReasons, type Lang } from "@/content/site";
@@ -19,7 +20,7 @@ const reasons = whyReasons[lang];
     eyebrow={t.heroEyebrow}
     title={t.heroTitle}
     text={t.heroText}
-    backgroundImage="/assets/hero-dog.jpg"
+    backgroundImage={heroDog}
   />
 
   <section class="why-us section" aria-labelledby="why-us-title">
@@ -33,15 +34,13 @@ const reasons = whyReasons[lang];
       <div class="why-us-story">
         <div class="why-us-year">
           <span class="why-us-year-value">{clinic.founded}</span>
-          <span class="why-us-year-label">{t.whyYearLabel}</span>
         </div>
         <p class="why-us-history">{t.whyHistory}</p>
       </div>
 
       <ol class="why-us-reasons">
-        {reasons.map((reason, index) => (
+        {reasons.map((reason) => (
           <li class="why-us-reason">
-            <span class="why-us-index">{String(index + 1).padStart(2, "0")}</span>
             <h3>{reason.title}</h3>
             <p>{reason.text}</p>
           </li>

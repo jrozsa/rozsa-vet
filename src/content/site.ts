@@ -7,22 +7,30 @@ export const languages: Record<Lang, { name: string; htmlLang: string }> = {
 
 export const clinic = {
   name: "Rozsa-Vet",
-  legalName: "Rozsa-Vet veterinárna nemocnica",
+  legalName: "Rozsa-Vet veterinárna ambulancia",
   founded: "1992",
   address: {
-    street: "Malotejedská ul. č. 538/15",
-    city: "Dunajská Streda",
-    postalCode: "929 01",
-    country: "Slovensko",
+    sk: {
+      street: "Malotejedská ul. č. 538/15",
+      city: "Dunajská Streda",
+      postalCode: "929 01",
+      country: "Slovensko",
+    },
+    hu: {
+      street: "Kistejedi u. 538/15",
+      city: "Dunaszerdahely",
+      postalCode: "929 01",
+      country: "Szlovákia",
+    },
   },
   mobile: "+421905321362",
   mobileDisplay: "+421 905 321 362",
   email: "rozsa-vet@rozsa-vet.sk",
   mapUrl:
-    "https://www.google.com/maps/search/?api=1&query=Malotejedsk%C3%A1%20538%2F15%2C%20929%2001%20Dunajsk%C3%A1%20Streda",
+    "https://www.google.com/maps/place/MVDr.+Jozef+R%C3%B3zsa/@47.9891587,17.6105252,211m/data=!3m1!1e3!4m14!1m7!3m6!1s0x476b9d68356d3ed3:0x18d3071a533ff98d!2sRozsa-Vet!8m2!3d47.9890221!4d17.610924!16s%2Fg%2F11fp8zcllq!3m5!1s0x476b9d68496dc811:0x7ffd6f7caeac3d8!8m2!3d47.9891818!4d17.6114931!16s%2Fg%2F12mkvpdtk?entry=ttu&g_ep=EgoyMDI2MTAyMC4wIKXMDSoASAFQAw%3D%3D",
   coordinates: {
-    latitude: 47.9889,
-    longitude: 17.6114,
+    latitude: 47.9891818,
+    longitude: 17.6114931,
   },
 };
 
@@ -65,14 +73,14 @@ export const nav = {
 export const pages = {
   sk: {
     home: {
-      title: "Veterinárna nemocnica v Dunajskej Strede",
+      title: "Veterinárna starostlivosť v Dunajskej Strede",
       description:
-        "Rozsa-Vet poskytuje veterinárnu starostlivosť, diagnostiku, chirurgiu, RTG, hospitalizáciu a preventívnu starostlivosť pre zvieratá v Dunajskej Strede.",
+        "Rozsa-Vet poskytuje veterinárnu starostlivosť, diagnostiku, chirurgiu, RTG a preventívnu starostlivosť pre zvieratá v Dunajskej Strede.",
     },
     services: {
       title: "Služby",
       description:
-        "Preventívne ošetrenia, laboratórna diagnostika, vakcinácia, RTG, laserová terapia, čipovanie, hospitalizácia a chirurgia.",
+        "Preventívne ošetrenia, laboratórna diagnostika, vakcinácia, RTG, laserová terapia, čipovanie a chirurgia.",
     },
     contact: {
       title: "Kontakt",
@@ -82,14 +90,14 @@ export const pages = {
   },
   hu: {
     home: {
-      title: "Állatkórház Dunaszerdahelyen",
+      title: "Állatorvosi ellátás Dunaszerdahelyen",
       description:
-        "A Rozsa-Vet állatorvosi ellátást, diagnosztikát, sebészetet, röntgent, kórházi ellátást és megelőző kezeléseket nyújt Dunaszerdahelyen.",
+        "A Rozsa-Vet állatorvosi ellátást, diagnosztikát, sebészetet, röntgent és megelőző kezeléseket nyújt Dunaszerdahelyen.",
     },
     services: {
       title: "Szolgáltatások",
       description:
-        "Megelőző kezelések, laboratóriumi diagnosztika, oltások, röntgen, lézerterápia, mikrochipezés, kórházi ellátás és sebészet.",
+        "Megelőző kezelések, laboratóriumi diagnosztika, oltások, röntgen, lézerterápia, mikrochipezés és sebészet.",
     },
     contact: {
       title: "Kapcsolat",
@@ -110,7 +118,7 @@ export const copy = {
     navigate: "Navigovať",
     hours: "Ordinačné hodiny",
     todayNote: "Mimo ordinačných hodín poskytujeme ošetrenie po telefonickom dohovore.",
-    heroEyebrow: "Veterinárna nemocnica od roku 1992",
+    heroEyebrow: "Veterinárna starostlivosť od roku 1992",
     heroTitle: "Komplexná veterinárna starostlivosť v Dunajskej Strede",
     heroText:
       "Rozsa-Vet spája dlhoročnú prax, diagnostické vybavenie a osobný prístup pri starostlivosti o malé, veľké aj exotické zvieratá.",
@@ -123,12 +131,12 @@ export const copy = {
     whyTitle: "Istota pre tých, ktorých máte radi",
     whyIntro:
       "Keď ide o zdravie zvieraťa, potrebujete viac než ordináciu. Potrebujete miesto, kde sa skúsenosť, vybavenie a ľudský prístup stretnú pod jednou strechou.",
-    whyYearLabel: "s nami od februára",
     whyHistory:
-      "Už viac ako tri desaťročia sme súčasťou života majiteľov v Dunajskej Strede a okolí. Od prvej vakcinácie až po náročnú nemocničnú starostlivosť — ostávame nablízku, keď na tom najviac záleží.",
+      "Už viac ako tri desaťročia sme súčasťou života majiteľov v Dunajskej Strede a okolí. Od prvej vakcinácie až po náročnejšiu veterinárnu starostlivosť — ostávame nablízku, keď na tom najviac záleží.",
     address: "Adresa",
     phone: "Telefón",
     mobile: "Mobil",
+    appointmentNote: "Poteší nás, ak sa na vyšetrenie ohlásite vopred telefonicky.",
     outOfHours: "Mimo ordinačných hodín po telefonickom dohovore na linke {phone}.",
   },
   hu: {
@@ -141,25 +149,25 @@ export const copy = {
     navigate: "Útvonalterv",
     hours: "Rendelési idő",
     todayNote: "Rendelési időn kívül telefonos egyeztetés alapján biztosítunk ellátást.",
-    heroEyebrow: "Állatkórház 1992 óta",
+    heroEyebrow: "Állatorvosi ellátás 1992 óta",
     heroTitle: "Komplex állatorvosi ellátás Dunaszerdahelyen",
     heroText:
       "A Rozsa-Vet több évtizedes tapasztalatot, diagnosztikai hátteret és személyes hozzáállást kínál kis-, nagy- és egzotikus állatok ellátásában.",
     servicesIntro:
-      "A szolgáltatásokat áttekinthető csoportokba rendeztük, hogy a gazdik gyorsan megtalálják a szükséges ellátást, a szakmai részletek pedig külön is elérhetők legyenek.",
+      "A szolgáltatásokat áttekinthető csoportokba rendeztük, hogy a gazdik gyorsan megtalálják a szükséges ellátást.",
     contactIntro:
       "Időpont, sürgős konzultáció vagy rendelési időn kívüli ellátás esetén kérjük, telefonon vegye fel velünk a kapcsolatot.",
     allServices: "Összes szolgáltatás",
     whyEyebrow: "Miért éppen mi",
-    whyTitle: "Biztonság azoknak, akiket szeret",
+    whyTitle: "Biztonság azok számára akiket szeret",
     whyIntro:
-      "Amikor az állat egészsége a tét, több kell egy rendelőnél. Olyan hely kell, ahol a tapasztalat, a felszerelés és a személyes odafigyelés egy fedél alatt találkozik.",
-    whyYearLabel: "velünk február óta",
+      "Amikor az állat egészsége a tét,egy egyszerű rendelőnél többre van szükség - egy olyan helyre ahol a tapasztalat, a felszerelés és a személyes odafigyelés egy fedél alatt találkozik.",
     whyHistory:
-      "Több mint három évtizede vagyunk a dunaszerdahelyi és környékbeli gazdik életének része. Az első oltástól a komolyabb kórházi ellátásig — ott vagyunk, amikor a leginkább számít.",
+      "Több mint három évtizede vagyunk a dunaszerdahelyi és környékbeli gazdik életének része. Az első oltástól a komolyabb állatorvosi ellátásig számíthat ránk.",
     address: "Cím",
     phone: "Telefon",
     mobile: "Mobil",
+    appointmentNote: "Köszönjük, ha a vizsgálat előtt telefonon egyeztet velünk.",
     outOfHours: "Rendelési időn kívül telefonos egyeztetés a {phone} számon.",
   },
 } satisfies Record<Lang, Record<string, string>>;
@@ -175,8 +183,8 @@ export const whyReasons = {
       text: "Od roku 1992 sme sprevádzali tisíce pacientov. Každé vyšetrenie stojí na praxi, ktorá sa budovala desaťročia — nie na náhlych rozhodnutiach.",
     },
     {
-      title: "Nemocnica, nie len ambulancia",
-      text: "Diagnostika, RTG, chirurgia aj hospitalizácia sú u nás na jednom mieste. Menej cestovania medzi pracoviskami, rýchlejšie a spoľahlivejšie rozhodnutia.",
+      title: "Komplexná starostlivosť pod jednou strechou",
+      text: "Diagnostika, RTG aj chirurgia sú u nás na jednom mieste. Menej cestovania medzi pracoviskami, rýchlejšie a spoľahlivejšie rozhodnutia.",
     },
     {
       title: "Rozumieme majiteľom aj pacientom",
@@ -186,11 +194,11 @@ export const whyReasons = {
   hu: [
     {
       title: "Tapasztalat, amit nem lehet siettetni",
-      text: "1992 óta kísérünk el több ezer pácienst. Minden vizsgálat mögött évtizedes gyakorlat áll — nem kapkodó döntések.",
+      text: "1992 óta több ezer pácienst kezeltünk. Minden vizsgálat mögött évtizedes gyakorlat áll — nem kapkodó döntések.",
     },
     {
-      title: "Kórház, nem csak rendelő",
-      text: "Diagnosztika, röntgen, sebészet és hospitalizáció egy helyen. Kevesebb utazás a vizsgálatok között, gyorsabb és biztosabb döntések.",
+      title: "Komplex ellátás egy helyen",
+      text: "Diagnosztika, röntgen és sebészet egy helyen. Kevesebb utazás a vizsgálatok között, gyorsabb és biztosabb döntések.",
     },
     {
       title: "Értjük a gazdit és a pácienst is",
@@ -212,7 +220,7 @@ export const services = {
       items: [
         "hematologické a biochemické vyšetrenia",
         "mikrobiologické, mykologické a parazitologické vyšetrenia",
-        "serológia: toxoplazmóza, leptospiróza, borelióza",
+        "serologické vyšetrenie",
         "titer antirabických protilátok po vakcinácii",
         "DNA screening, PBFD, chlamydia psittaci a určenie pohlavia vtákov",
         "patohistologické vyšetrenie",
@@ -221,12 +229,12 @@ export const services = {
     {
       title: "Zobrazovacia diagnostika a terapia",
       text: "RTG a laserová terapia podporujú diagnostiku, liečbu bolesti, rehabilitáciu a pooperačnú starostlivosť.",
-      items: ["RTG natívne snímky", "kontrastné vyšetrenia", "posúdenie dysplázie bedrových a lakťových kĺbov", "laserová terapia v ortopédii, neurológii, dermatológii a stomatológii"],
+      items: ["RTG natívne snímky", "posúdenie dysplázie bedrových a lakťových kĺbov", "laserová terapia v ortopédii, neurológii, dermatológii a stomatológii"],
     },
     {
-      title: "Chirurgia a hospitalizácia",
+      title: "Chirurgia",
       text: "Operačné zákroky a následná starostlivosť pre pacientov, ktorí potrebujú dôsledné sledovanie.",
-      items: ["chirurgia mäkkých tkanív", "cisárske rezy", "odstránenie novotvarov", "kostná chirurgia", "chirurgia oka", "hospitalizácia pacientov"],
+      items: ["chirurgia mäkkých tkanív", "cisárske rezy", "odstránenie novotvarov", "kostná chirurgia", "chirurgia oka"],
     },
     {
       title: "Zubné ošetrenie a anestézia",
@@ -246,7 +254,7 @@ export const services = {
       items: [
         "hematológiai és biokémiai vizsgálatok",
         "mikrobiológiai, mikológiai és parazitológiai vizsgálatok",
-        "szerológia: toxoplazmózis, leptospirózis, borreliózis",
+        "szerológiai vizsgálat",
         "veszettség elleni antitest-titer oltás után",
         "DNS screening, PBFD, chlamydia psittaci és madarak nemének meghatározása",
         "kórszövettani vizsgálat",
@@ -255,12 +263,12 @@ export const services = {
     {
       title: "Képalkotó diagnosztika és terápia",
       text: "A röntgen és a lézerterápia támogatja a diagnózist, a fájdalomcsillapítást, a rehabilitációt és a műtét utáni ellátást.",
-      items: ["natív röntgenfelvételek", "kontrasztos vizsgálatok", "csípő- és könyökízületi diszplázia vizsgálata", "lézerterápia ortopédiában, neurológiában, bőrgyógyászatban és fogászatban"],
+      items: ["natív röntgenfelvételek", "csípő- és könyökízületi diszplázia vizsgálata", "lézerterápia ortopédiában, neurológiában, bőrgyógyászatban és fogászatban"],
     },
     {
-      title: "Sebészet és kórházi ellátás",
+      title: "Sebészet",
       text: "Műtéti beavatkozások és utógondozás azoknak a betegeknek, akik folyamatos megfigyelést igényelnek.",
-      items: ["lágyrészsebészet", "császármetszés", "daganatok eltávolítása", "csontsebészet", "szemsebészet", "betegek hospitalizációja"],
+      items: ["lágyrészsebészet", "császármetszés", "daganatok eltávolítása", "csontsebészet", "szemsebészet"],
     },
     {
       title: "Fogászati ellátás és altatás",

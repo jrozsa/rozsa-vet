@@ -12,8 +12,9 @@ interface Props {
 const { lang } = Astro.props;
 const path = routes[lang].contact;
 const t = copy[lang];
-const address = `${clinic.address.street}, ${clinic.address.postalCode} ${clinic.address.city}`;
-const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(address)}&output=embed`;
+const addr = clinic.address[lang];
+const mapQueryAddress = `${clinic.address.sk.street}, ${clinic.address.sk.postalCode} ${clinic.address.sk.city}`;
+const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(`MVDr. Jozef Rózsa, ${mapQueryAddress}`)}&output=embed`;
 const [outOfHoursBefore, outOfHoursAfter] = t.outOfHours.split("{phone}");
 ---
 
@@ -31,9 +32,9 @@ const [outOfHoursBefore, outOfHoursAfter] = t.outOfHours.split("{phone}");
           <div class="contact-info-block">
             <h2>{t.address}</h2>
             <p>
-              {clinic.address.street}<br />
-              {clinic.address.postalCode} {clinic.address.city}<br />
-              {clinic.address.country}
+              {addr.street}<br />
+              {addr.postalCode} {addr.city}<br />
+              {addr.country}
             </p>
           </div>
           <div class="contact-info-block">
@@ -51,21 +52,27 @@ const [outOfHoursBefore, outOfHoursAfter] = t.outOfHours.split("{phone}");
         </article>
       </div>
 
-      <div class="card">
-        <h2>{t.hours}</h2>
-        <HoursList lang={lang} />
-        <p class="hours-note">
-          {outOfHoursBefore}
-          <a href={`tel:${clinic.mobile}`}>{clinic.mobileDisplay}</a>
-          {outOfHoursAfter}
+      <div class="contact-hours">
+        <p class="appointment-bubble">
+          {t.appointmentNote}
         </p>
-        <div class="map-frame" aria-label={lang === "sk" ? "Mapa kliniky Rozsa-Vet" : "Rozsa-Vet térkép"}>
-          <iframe
-            title={lang === "sk" ? "Mapa Rozsa-Vet" : "Rozsa-Vet térkép"}
-            src={mapSrc}
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          ></iframe>
+
+        <div class="card">
+          <h2>{t.hours}</h2>
+          <HoursList lang={lang} />
+          <p class="hours-note">
+            {outOfHoursBefore}
+            <a href={`tel:${clinic.mobile}`}>{clinic.mobileDisplay}</a>
+            {outOfHoursAfter}
+          </p>
+          <div class="map-frame" aria-label={lang === "sk" ? "Mapa kliniky Rozsa-Vet" : "Rozsa-Vet térkép"}>
+            <iframe
+              title={lang === "sk" ? "Mapa Rozsa-Vet" : "Rozsa-Vet térkép"}
+              src={mapSrc}
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
         </div>
       </div>
     </div>
